@@ -1,29 +1,23 @@
 class ApplicationController < ActionController::Base
-	protect_from_forgery
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
 
-	rescue_from OAuth2::Error do |exception|
-		if exception.response.status == 401
-			session[:customer_id] = nil
-			session[:access_token] = nil
-			redirect_to root_url, alert: "Token problem"
-		end
-	end
+  def login_required
+    if !current_customer
+      respond_to do |format|
+        format.html  {
+          redirect_to '/api/auth/sso'
+        }
+        format.json {
+          render :json => { 'error' => 'Access Denied' }.to_json
+        }
+      end
+    end
+  end
 
-private
-	def oauth_client
-		byebug
-		@oauth_client ||= OAuth2::Client.new(ENV["OAUTH_ID"], ENV["OAUTH_SECRET"], site: "http://localhost:3000")
-	end
-
-	def access_token
-		byebug
-		if session[:access_token]
-			@access_token ||= OAuth2::AccessToken.new(oauth_client, session[:access_token])
-		end
-	end
-
-	# def current_customer
-	# 	current_customer ||= Customer.find(session[:customer_id])if session[:customer_id]
-	# end
-	#helper method :current_customer
+  def current_customer
+    return nil unless session[:customer_id]
+    @current_customer ||= Customer.find_by_uid(session[:customer_id]['uid'])
+  end
 end

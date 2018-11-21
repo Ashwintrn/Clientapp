@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  get 'orders/index', to: 'orders#index', as: 'index_order', :defaults => { :format => 'json'} 
-  root 'welcome#index'
+  
+  root 'orders#index'
+
+  # omniauth
+  get '/auth/:provider/callback' => 'customer_sessions#create'
+  get '/auth/failure' => 'customer_sessions#failure'
+
+  # Custom logout
+  match '/logout', :to => 'customer_sessions#destroy', via: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

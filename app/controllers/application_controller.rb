@@ -4,13 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def login_required
+    byebug
     if !current_customer
       respond_to do |format|
-        format.html  {
-          redirect_to '/api/auth/sso'
-        }
+        # format.html  {
+        #   redirect_to '/auth'
+        # }
         format.json {
-          render :json => { 'error' => 'Access Denied' }.to_json
+          render :json => { 'error' => 'Access Denied' }
         }
       end
     end

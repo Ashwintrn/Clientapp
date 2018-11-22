@@ -74,6 +74,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.3)
     crass (1.0.4)
+    doorkeeper (5.0.2)
+      railties (>= 4.2)
     dotenv (2.5.0)
     dotenv-rails (2.5.0)
       dotenv (= 2.5.0)
@@ -86,6 +88,9 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.5.7)
+    httparty (0.16.3)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -105,6 +110,9 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
+    mime-types (3.2.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2018.0812)
     mimemagic (0.3.2)
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
@@ -128,6 +136,8 @@ GEM
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
+    operation (0.0.3)
+      hashie
     public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.6)
@@ -178,6 +188,7 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
+    signature (0.1.8)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -191,6 +202,13 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
+    sso (0.1.4)
+      doorkeeper (>= 2.0.0)
+      httparty
+      omniauth-oauth2
+      operation (~> 0.0.3)
+      signature (>= 0.1.8)
+      warden (>= 1.2.3)
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -201,6 +219,8 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
+    warden (1.2.8)
+      rack (>= 2.0.6)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -232,6 +252,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
+  sso
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)

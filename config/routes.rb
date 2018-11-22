@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root 'orders#index'
+  root 'welcome#index'
 
   # omniauth
   get '/auth/:provider/callback' => 'customer_sessions#create'
